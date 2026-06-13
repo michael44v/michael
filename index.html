@@ -1,406 +1,898 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Michael Nwankwo | Web Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Heroicons (for GitHub icon) -->
-<script src="https://unpkg.com/feather-icons"></script>
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-<style>
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-4px); }
-    40% { transform: translateX(4px); }
-    60% { transform: translateX(-4px); }
-    80% { transform: translateX(4px); }
-  }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Nwankwo — Full-Stack & Mobile Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .shake-every-2s {
-    animation: shake 1s ease-in-out infinite;
-    animation-delay: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: normal;
-  }
-</style>
+    :root {
+      --bg:       #0d0f14;
+      --surface:  #13161e;
+      --border:   #1e2330;
+      --amber:    #f59e0b;
+      --amber-dim:#7c4f06;
+      --text:     #e2e8f0;
+      --muted:    #64748b;
+      --soft:     #94a3b8;
+      --mono:     'JetBrains Mono', monospace;
+      --sans:     'Inter', sans-serif;
+    }
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
-<style>
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
+    html { scroll-behavior: smooth; }
 
-  @keyframes blink {
-    50% { border-color: transparent }
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-  .typewriter {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid white;
-    width: 0;
-    animation:
-      typing 2s steps(20, end) 0.5s forwards,
-      blink 0.75s step-end infinite;
-  }
-</style>
-<!-- AOS CSS -->
-<!-- AOS CSS -->
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-<!-- Devicon (icons for tech stacks) -->
-<link href="https://cdn.jsdelivr.net/npm/devicon@2.15.1/devicon.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 56px;
+      background: rgba(13,15,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--amber);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--muted); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      color: var(--soft);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber); }
+    .nav-cta {
+      font-size: 0.78rem;
+      font-family: var(--mono);
+      color: var(--amber);
+      border: 1px solid var(--amber);
+      padding: 0.35rem 0.9rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--amber); color: var(--bg); }
 
-  </head>
-  <!-- AOS JS -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-      duration: 1000,
-      delay: 100,
-      once: true,
-    });
-  });
-</script>
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 5vw;
+      gap: 4rem;
+      padding-top: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
+    .hero-left { max-width: 560px; }
 
-  <body class="bg-gray-900 text-white font-sans">
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--amber);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--amber);
+    }
 
-<!-- Sticky Social Links -->
-<div class="sticky top-0 z-50 bg-gray-900 text-white flex justify-center gap-8 py-4 shadow-md mt-2">
-  <!-- GitHub -->
-  <a href="https://github.com/Michael47009" target="_blank" class="hover:text-indigo-400 flex items-center gap-2">
-    <i data-feather="github" class="w-6 h-6"></i>
-    <span class="hidden sm:inline">GitHub</span>
-  </a>
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    h1 .name-amber { color: var(--amber); }
+    h1 .name-dim { color: var(--muted); }
 
-  <!-- Twitter -->
-  <a href="https://x.com/RnaEu_" target="_blank" class="hover:text-indigo-400 flex items-center gap-2">
-    <i data-feather="twitter" class="w-6 h-6"></i>
-    <span class="hidden sm:inline">Twitter</span>
-  </a>
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--soft);
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
 
-  <!-- Email -->
-  <a href="mailto:michaelnwankwoscloud@gmail.com" class="hover:text-indigo-400 flex items-center gap-2">
-    <i data-feather="mail" class="w-6 h-6"></i>
-    <span class="hidden sm:inline">Email</span>
-  </a>
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: 3px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      color: var(--soft);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--soft); color: var(--text); }
+
+    /* ── BUILD LOG (hero right) ── */
+    .build-log {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+    .build-log-bar {
+      background: #1a1d27;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .log-title { color: var(--muted); font-size: 0.72rem; margin-left: 0.5rem; }
+    .build-log-body { padding: 1.2rem 1.4rem; line-height: 2; min-height: 280px; }
+    .log-line { display: flex; gap: 0.6rem; }
+    .log-line .ts { color: var(--muted); user-select: none; }
+    .log-line .ok { color: #28c840; }
+    .log-line .info { color: var(--amber); }
+    .log-line .dim { color: var(--soft); }
+    .log-line .hi { color: #60a5fa; }
+    .cursor-blink {
+      display: inline-block;
+      width: 7px; height: 14px;
+      background: var(--amber);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--amber);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: var(--mono);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    /* ── STACK STRIP ── */
+    #stack {
+      padding: 2rem 5vw;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .stack-chip {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--soft);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .stack-chip:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--soft);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .stat-list { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
+    .stat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+      min-width: 2.5rem;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--soft); line-height: 1.4; margin-top: 0.2rem; }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--amber);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .project-card:hover { border-color: #2a3042; transform: translateY(-3px); }
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-header { display: flex; align-items: flex-start; justify-content: space-between; }
+    .project-icon {
+      font-family: var(--mono);
+      font-size: 1.4rem;
+    }
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--amber);
+      border: 1px solid var(--amber-dim);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+    .project-name {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--soft);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .project-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-chip {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: #1a1d27;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+    .project-links { display: flex; gap: 1rem; padding-top: 0.4rem; border-top: 1px solid var(--border); }
+    .project-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--soft);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.3rem;
+      transition: color 0.2s;
+    }
+    .project-links a:hover { color: var(--amber); }
+
+    /* ── PROJECT THUMBNAIL ── */
+    .project-thumb-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: #0a0c10;
+    }
+    .project-thumb {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      opacity: 0.82;
+      transition: opacity 0.25s, transform 0.35s;
+    }
+    .project-card:hover .project-thumb {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    /* ── FEATURED PROJECT ── */
+    .project-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+    }
+    .project-card.featured .project-body { display: flex; flex-direction: column; gap: 0.8rem; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--bg); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+    .testimonial-card blockquote {
+      font-size: 0.9rem;
+      color: var(--soft);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+      position: relative;
+      padding-left: 1rem;
+      border-left: 2px solid var(--amber);
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .author-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--amber);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 0.85rem; font-weight: 500; color: var(--text); }
+    .author-role { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--surface);
+      text-align: center;
+    }
+    #contact h2 { margin-bottom: 0.75rem; }
+    #contact p { color: var(--soft); max-width: 460px; margin: 0 auto 2.5rem; font-size: 0.95rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--soft);
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.2rem;
+      border-radius: 3px;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--amber); color: var(--amber); }
+    .contact-link.primary {
+      background: var(--amber);
+      color: var(--bg);
+      border-color: var(--amber);
+      font-weight: 600;
+    }
+    .contact-link.primary:hover { opacity: 0.85; color: var(--bg); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 5vw;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; padding-top: 80px; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .project-card.featured { grid-template-columns: 1fr; }
+      .project-card.featured .project-thumb-wrap { min-width: unset !important; aspect-ratio: 16/9 !important; }
+      nav .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.2rem; }
+      nav { padding: 0 1.2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    /* ── SCROLL FADE ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MN<span>/</span>dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#testimonials">reviews</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <a href="cv.pdf" download class="nav-cta">cv.pdf ↓</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">available for remote work</p>
+    <h1>
+      <span class="name-dim">Michael</span><br>
+      <span class="name-amber">Nwankwo</span>
+    </h1>
+    <p class="hero-desc">
+      Full-stack & mobile developer shipping production-grade web platforms and React Native apps. 
+      Based in Nigeria. Building things that work at scale.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View projects →</a>
+      <a href="mailto:michaelnwankwoscloud@gmail.com" class="btn-ghost">get in touch</a>
+    </div>
+  </div>
+
+  <div class="build-log" id="buildLog">
+    <div class="build-log-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <span class="log-title">michael@dev ~ build log</span>
+    </div>
+    <div class="build-log-body" id="logBody">
+      <!-- JS fills this -->
+    </div>
+  </div>
+</section>
+
+<!-- STACK STRIP -->
+<div id="stack">
+  <div class="stack-row">
+    <span class="stack-chip">React</span>
+    <span class="stack-chip">React Native</span>
+    <span class="stack-chip">TypeScript</span>
+    <span class="stack-chip">Expo SDK 54</span>
+    <span class="stack-chip">PHP</span>
+    <span class="stack-chip">FastAPI</span>
+    <span class="stack-chip">PostgreSQL</span>
+    <span class="stack-chip">MySQL</span>
+    <span class="stack-chip">Node.js</span>
+    <span class="stack-chip">Tailwind CSS</span>
+    <span class="stack-chip">Redux</span>
+    <span class="stack-chip">JWT Auth</span>
+    <span class="stack-chip">Paystack</span>
+    <span class="stack-chip">REST APIs</span>
+  </div>
 </div>
 
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p class="section-label">// about</p>
+      <h2>I build platforms,<br>not just pages.</h2>
+      <p>
+        I'm a full-stack and mobile developer who works across the entire product — 
+        from database schema to pixel-perfect UI. I've led the engineering on 
+        <strong>FutyBills</strong>, a live gadget marketplace with a React web frontend, 
+        React Native mobile app, and a PHP backend handling payments, reservations, MFA, and real-time chat.
+      </p>
+      <p>
+        I'm currently migrating that backend to <strong>FastAPI + PostgreSQL</strong> and shipping 
+        features across web and mobile simultaneously. I write the code, debug the edge cases, 
+        and make it fast.
+      </p>
+      <p>
+        I work well in async remote teams, communicate clearly, and ship on time.
+      </p>
+    </div>
+    <div class="stat-list">
+      <div class="stat-item">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Production projects shipped — marketplace, flight booking, crypto dashboard, DeFi platform</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Platforms with live payment integrations (Paystack, Web3)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Debug sessions survived. Still shipping.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Hero -->
-<section class="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-20 pt-32 md:pt-0 gap-12">
-  <!-- Left Content -->
-  <div 
-    class="text-center md:text-left max-w-xl md:ml-8" 
-    data-aos="fade-right"
-  >
-    <h1 class="text-4xl md:text-6xl font-bold whitespace-nowrap">
-        <h3>Hi, am</h3>
-      <span class="typewriter">Michael Nwankwo</span>
-    </h1>
-<style>
-    .typewriter {
-        font-size: 37px !important;
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// selected work</p>
+  <h2>Things I've shipped</h2>
+
+  <div class="projects-grid">
+
+    <!-- FutyBills — Featured -->
+    <div class="project-card featured fade-in">
+      <div class="project-body">
+        <div class="project-header">
+          <span class="project-icon">🛒</span>
+          <span class="project-tag">LEAD ENGINEER</span>
+        </div>
+        <div class="project-name">FutyBills — Gadget Marketplace</div>
+        <p class="project-desc">
+          End-to-end platform for buying and selling electronics. Built the React web frontend, 
+          React Native mobile app (Expo SDK 54), and the PHP/MySQL backend. 
+          Features include JWT auth + MFA, real-time chat, Paystack checkout with reservation locking, 
+          and a Redux-powered marketplace with live category filtering.
+        </p>
+        <div class="project-chips">
+          <span class="project-chip">React</span>
+          <span class="project-chip">React Native</span>
+          <span class="project-chip">TypeScript</span>
+          <span class="project-chip">PHP</span>
+          <span class="project-chip">MySQL</span>
+          <span class="project-chip">Paystack</span>
+          <span class="project-chip">Redux</span>
+          <span class="project-chip">JWT</span>
+        </div>
+        <div class="project-links">
+          <a href="https://futybills.com" target="_blank">↗ Live site</a>
+          <a href="https://app.futybills.com/marketplace target="_blank">↗ Marketplace </a>
+        </div>
+      </div>
+      <div class="project-thumb-wrap" style="min-width:340px; aspect-ratio:4/3;">
+        <img src="https://futybills.com/api/Michael_dev/thumb_futybills.png" alt="FutyBills marketplace screenshot" class="project-thumb" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Flight Ticket Booking -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <span class="project-icon">✈️</span>
+        <span class="project-tag">FULLSTACK</span>
+      </div>
+      <div class="project-name">SkyBridge — Flight Booking</div>
+      <div class="project-thumb-wrap">
+        <img src="https://futybills.com/api/Michael_dev/thumb_flight.png" alt="SkyBridge flight booking screenshot" class="project-thumb" loading="lazy">
+      </div>
+      <p class="project-desc">
+        Full airline booking platform — SkyBridge Airlines. Hero with live flight search, 
+        cabin class selection, multi-destination support, and a polished checkout flow. 
+        Includes a real-time flight status board and multilingual UI.
+      </p>
+      <div class="project-chips">
+        <span class="project-chip">React</span>
+        <span class="project-chip">Node.js</span>
+        <span class="project-chip">REST API</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Michael47009" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <!-- Chaindustry -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <span class="project-icon">⛓️</span>
+        <span class="project-tag">FRONTEND</span>
+      </div>
+      <div class="project-name">Chaindustry</div>
+      <div class="project-thumb-wrap">
+        <img src="https://futybills.com/api/Michael_dev/thumb_chaindustry.png" alt="Chaindustry Web3 platform screenshot" class="project-thumb" loading="lazy">
+      </div>
+      <p class="project-desc">
+        Frontend for a DoToEarn Web3 network. Built the features page with task/earn flows, 
+        CDSP token conversion UI, animated leaderboard, and mobile app mockups. 
+        Dark purple aesthetic with wallet connection and NFT exchange.
+      </p>
+      <div class="project-chips">
+        <span class="project-chip">React</span>
+        <span class="project-chip">Web3</span>
+        <span class="project-chip">Tailwind</span>
+      </div>
+      <div class="project-links">
+        <a href="https://chaindustry.io" target="_blank">↗ Live site</a>
+        <a href="https://github.com/Michael44v/chaindustry" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <!-- Crypto Investment -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <span class="project-icon">📈</span>
+        <span class="project-tag">FULLSTACK</span>
+      </div>
+      <div class="project-name">BlueVault — Crypto Platform</div>
+      <div class="project-thumb-wrap">
+        <img src="https://futybills.com/api/Michael_dev/thumb_crypto.png" alt="BlueVault crypto investment dashboard screenshot" class="project-thumb" loading="lazy">
+      </div>
+      <p class="project-desc">
+        Full crypto investment dashboard — live market cap, Fear & Greed index, 
+        Altcoin season tracker, real-time price ticker, and portfolio management. 
+        CoinMarketCap-style data density with live price polling and social feed.
+      </p>
+      <div class="project-chips">
+        <span class="project-chip">React</span>
+        <span class="project-chip">TypeScript</span>
+        <span class="project-chip">PHP</span>
+        <span class="project-chip">Web3</span>
+        <span class="project-chip">CoinGecko API</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Michael47009" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <!-- Slate Admin Dashboard -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <span class="project-icon">📊</span>
+        <span class="project-tag">FULLSTACK</span>
+      </div>
+      <div class="project-name">Slate — Admin Dashboard</div>
+      <div class="project-thumb-wrap" style="background:#0f1117; display:flex; align-items:center; justify-content:center;">
+        <img src="https://futybills.com/api/Michael_dev/slate.jpeg" alt="Slate admin dashboard" class="project-thumb" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\'font-family:var(--mono);font-size:0.72rem;color:var(--muted)\'>slate.jpeg</span>'">
+      </div>
+      <p class="project-desc">
+        Admin dashboard built with React, TypeScript, and Express. 
+        Tracks income and expenses in real time with chart visualisations, 
+        transaction history, and category breakdowns.
+      </p>
+      <div class="project-chips">
+        <span class="project-chip">React</span>
+        <span class="project-chip">TypeScript</span>
+        <span class="project-chip">Express</span>
+        <span class="project-chip">Charts</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Michael47009" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+    <!-- FED API Test -->
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <span class="project-icon">🧪</span>
+        <span class="project-tag">REACT</span>
+      </div>
+      <div class="project-name">FED API Test 2025</div>
+      <p class="project-desc">
+        Frontend engineering interview assessment answered in React JSX. 
+        Demonstrates REST API consumption, component architecture, 
+        and clean state management under time constraint.
+      </p>
+      <div class="project-chips">
+        <span class="project-chip">React</span>
+        <span class="project-chip">JSX</span>
+        <span class="project-chip">REST API</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Michael47009/REACT-JS-FED-API-TEST-2025-" target="_blank">↗ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label fade-in">// people say</p>
+  <h2 class="fade-in">From clients & colleagues</h2>
+
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card fade-in">
+      <blockquote>
+        An excellent frontend developer. Delivered clean, responsive designs 
+        and collaborated seamlessly with the team throughout the project.
+      </blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">DL</div>
+        <div>
+          <div class="author-name">David Lawal</div>
+          <div class="author-role">Project Manager</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card fade-in">
+      <blockquote>
+        Great attention to detail. The UI/UX improvements he made boosted 
+        our user engagement significantly within weeks of launch.
+      </blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">BC</div>
+        <div>
+          <div class="author-name">Blessing Chiamaka Orji</div>
+          <div class="author-role">Startup Founder</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card fade-in">
+      <blockquote>
+        Guy delivers smooth. I keep bringing more deals because I know the 
+        work will come out right every time. Solid engineer.
+      </blockquote>
+      <div class="testimonial-author">
+        <div class="author-avatar">BR</div>
+        <div>
+          <div class="author-name">B'G Russ</div>
+          <div class="author-role">Client</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">// contact</p>
+  <h2>Let's build something.</h2>
+  <p>Open to remote contracts, full-time roles, and interesting projects. Response within 24h.</p>
+  <div class="contact-links">
+    <a href="mailto:michaelnwankwoscloud@gmail.com" class="contact-link primary">
+      ✉ michaelnwankwoscloud@gmail.com
+    </a>
+    <a href="https://github.com/Michael47009" target="_blank" class="contact-link">
+      ⌥ GitHub
+    </a>
+    <a href="https://x.com/RnaEu_" target="_blank" class="contact-link">
+      ✦ Twitter / X
+    </a>
+    <a href="cv.pdf" download class="contact-link">
+      ↓ Download CV
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>Michael Nwankwo — Full-Stack & Mobile Developer</span>
+  <span>Abuja, Nigeria · 2026</span>
+</footer>
+
+<script>
+  // ── BUILD LOG ANIMATION ──
+  const lines = [
+    { ts: '00:00:01', type: 'ok',   text: 'system   booted successfully' },
+    { ts: '00:00:02', type: 'info', text: 'loading  React + TypeScript workspace' },
+    { ts: '00:00:03', type: 'hi',   text: 'compile  FutyBills marketplace — web + mobile' },
+    { ts: '00:00:05', type: 'ok',   text: 'deploy   futybills.com → production' },
+    { ts: '00:00:07', type: 'hi',   text: 'compile  flight booking platform' },
+    { ts: '00:00:09', type: 'ok',   text: 'deploy   tickets → production' },
+    { ts: '00:00:11', type: 'hi',   text: 'compile  chaindustry web3 frontend' },
+    { ts: '00:00:13', type: 'ok',   text: 'deploy   chaindustry.io → production' },
+    { ts: '00:00:15', type: 'hi',   text: 'compile  crypto investment dashboard' },
+    { ts: '00:00:17', type: 'ok',   text: 'deploy   crypto platform → production' },
+    { ts: '00:00:18', type: 'info', text: 'migrate  PHP backend → FastAPI + PostgreSQL' },
+    { ts: '00:00:19', type: 'dim',  text: 'status   5 projects shipped · still building' },
+    { ts: '00:00:20', type: 'ok',   text: 'ready    open to remote work ✓' },
+  ];
+
+  const logBody = document.getElementById('logBody');
+  let i = 0;
+  function appendLine() {
+    if (i >= lines.length) {
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor-blink';
+      logBody.appendChild(cursor);
+      return;
     }
-</style>
-    <p class="text-xl md:text-2xl mt-4 text-gray-400">A Full-Stack Web Developer.</p>
+    const l = lines[i++];
+    const div = document.createElement('div');
+    div.className = 'log-line';
+    div.innerHTML = `<span class="ts">${l.ts}</span><span class="${l.type}">${l.text}</span>`;
+    logBody.appendChild(div);
+    logBody.scrollTop = logBody.scrollHeight;
+    setTimeout(appendLine, 280);
+  }
+  setTimeout(appendLine, 800);
 
-    <!-- Tech Icons -->
-    <div class="flex flex-wrap justify-center md:justify-start gap-4 mt-6 text-4xl text-gray-300">
-      <i class="devicon-react-original colored" title="React"></i>
-      <i class="devicon-javascript-plain colored" title="JavaScript"></i>
-      <i class="devicon-nextjs-original-wordmark" title="Next.js"></i>
-      <i class="devicon-php-plain colored" title="PHP"></i>
-      <i class="devicon-laravel-plain colored" title="Laravel"></i>
-      <i class="devicon-python-plain colored" title="Python"></i>
-      <i class="devicon-nodejs-plain colored" title="Node.js"></i>
-    </div>
+  // ── SCROLL FADE ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    <!-- Button -->
-    <a href="https://github.com/Michael47009" class="mt-6 inline-block bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-500 transition">
-      View My Work
-    </a>
-  </div>
-
-  <!-- Image -->
-  <div 
-    class="w-full md:w-1/2 flex justify-center" 
-    data-aos="fade-left"
-  >
-    <img
-      src="https://res.cloudinary.com/dguvkirdr/image/upload/v1770826652/stories/zjznw7wlpwjhr3h6tbir.jpg"
-      alt="Michael Nwankwo"
-      class="rounded-2xl shadow-xl w-80 h-80 object-cover"
-    />
-  </div>
-</section>
-
-<!-- About -->
-<section id="about" class="px-6 py-16 bg-gray-800 text-white">
-  <h2 class="text-3xl font-bold mb-6 text-center" data-aos="fade-up">About Me</h2>
-
-  <p class="max-w-3xl mx-auto text-gray-300 text-center" data-aos="fade-up" data-aos-delay="100">
-    I’m a results-driven web developer with a passion for crafting fast, scalable, and user-focused web applications. With hands-on experience in technologies like React, TypeScript, PHP, and Node.js, I specialize in building clean, maintainable solutions that turn complex challenges into intuitive digital experiences.
-
-  </p>
-
-  <div class="mt-10 flex flex-wrap justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-    <!-- Tech Stack Buttons with Icons -->
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i data-feather="code" class="w-4 h-4"></i> PHP
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-laravel-plain colored text-red-500"></i> Laravel
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-javascript-plain colored text-yellow-400"></i> JavaScript
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-react-original colored text-blue-400"></i> React JS
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-nextjs-original-wordmark text-white"></i> Next JS
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-typescript-plain colored text-blue-500"></i> TypeScript
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-tailwindcss-plain colored text-teal-400"></i> Tailwind
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-amazonwebservices-original colored text-yellow-500"></i> AWS
-    </button>
-    <button class="bg-gray-700 px-4 py-2 rounded-full flex items-center gap-2">
-      <i class="devicon-mongodb-plain colored text-green-500"></i> MongoDB
-    </button>
-  </div>
-</section>
-<!-- Projects -->
-<section id="projects" class="px-6 py-16 bg-gray-900 text-white">
-  <h2 class="text-3xl font-bold mb-10 text-center" data-aos="fade-up">Projects</h2>
-
-  <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-    <!-- Project Card 1 -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
-      <h3 class="text-xl font-semibold">Slate Admin Dashboard</h3>
-      <p class="text-gray-400 mt-2">Built with React, TypeScript, and Express. Tracks income and expenses in real time.</p>
-
-      <!-- Image below description -->
-      <img style='transform:scale(0.8);' src="https://github.com/michael44v/michael/blob/main/slate.jpeg" alt="Finance Tracker App" class="rounded-md my-4" />
-
-      <!-- Links -->
-      <div class="flex gap-4 items-center mt-2">
-        <a href="#" class="text-indigo-400 hover:underline">Live Site →</a>
-        <a href="#" class="text-indigo-400 hover:underline flex items-center gap-1">
-          <i data-feather="github" class="w-4 h-4"></i> GitHub
-        </a>
-      </div>
-    </div>
-
-    <!-- Project Card 2 -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
-      <h3 class="text-xl font-semibold">FutyBills Tech WebApp</h3>
-      <p class="text-gray-400 mt-2">Lead Fullstack Developer | FutyBills
-"Architecting a high-performance ecosystem connecting startups with global investors. I lead the end-to-end development of a multi-faceted platform, integrating complex marketplace logic with seamless talent-matching systems. Focused on building scalable, secure, and user-centric web architectures that bridge the gap between capital and innovation."</p>
-        
-        
-      <img src="https://futybills.com/img/ftyyy.png" />
-
-      <div class="flex gap-4 items-center mt-2">
-        <a href="https://futybills.com" class="text-indigo-400 hover:underline">Live Site →</a>
-        <a href="https://futybills.com" class="text-indigo-400 hover:underline">Web Applicstion →</a>
-        
-      </div>
-    </div>
-
-    <!-- Project Card 3 -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
-      <h3 class="text-xl font-semibold">Chaindustry Frontend Dev.</h3>
-      <p class="text-gray-400 mt-2">Chaindustry is a DoToEarn network offering value and digital services to it's users and partners.</p>
-      <img src="https://github.com/michael44v/michael/blob/main/chain.png" alt="Portfolio Website" class="rounded-md my-4" />
-
-      <div class="flex gap-4 items-center mt-2">
-        <a href="chaindustry.io" class="text-indigo-400 hover:underline">Live Site →</a>
-        <a href="https://github.com/Michael44v/chaindustry" class="text-indigo-400 hover:underline flex items-center gap-1">
-          <i data-feather="github" class="w-4 h-4"></i> GitHub
-        </a>
-      </div>
-    </div>
-
-    <!-- Project Card 4 -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="400">
-      <h3 class="text-xl font-semibold">FED API TEST 2025</h3>
-      <p class="text-gray-400 mt-2">FED API tests interview question answered with React JSX .</p>
-     <img src="fedapi.jpeg" alt="Portfolio Website" class="rounded-md my-4" />
-      <div class="flex gap-4 items-center mt-2">
-        
-        <a href="https://github.com/Michael47009/REACT-JS-FED-API-TEST-2025-" class="text-indigo-400 hover:underline flex items-center gap-1">
-          <i data-feather="github" class="w-4 h-4"></i> GitHub
-        </a>
-      </div>
-    </div>
-
-   <!-- Project Card 5 -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
-      <h3 class="text-xl font-semibold">NXDEV Portfolio</h3>
-      <p class="text-gray-400 mt-2">Brand portfolio for Web Dev Agency using html and AOS.</p>
-      <img src="https://github.com/michael44v/michael/blob/main/nx.png" alt="Portfolio Website" class="rounded-md my-4" />
-
-      <div class="flex gap-4 items-center mt-2">
-        <a href="index.html" class="text-indigo-400 hover:underline">Live Site →</a>
-        <a href="https://github.com/Michael47009/mybrandwebsite" class="text-indigo-400 hover:underline flex items-center gap-1">
-          <i data-feather="github" class="w-4 h-4"></i> GitHub
-        </a>
-      </div>
-    </div>
-
-    <!-- Project Card 5 -->
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="400">
-      <h3 class="text-xl font-semibold">FED API TEST 2025</h3>
-      <p class="text-gray-400 mt-2">FED API tests Passed question answered with React JSX .</p>
-     <img src="https://github.com/michael44v/michael/blob/main/fedapi.jpeg" alt="Portfolio Website" class="rounded-md my-4" />
-      <div class="flex gap-4 items-center mt-2">
-        
-        <a href="https://github.com/Michael47009/REACT-JS-FED-API-TEST-2025-" class="text-indigo-400 hover:underline flex items-center gap-1">
-          <i data-feather="github" class="w-4 h-4"></i> GitHub
-        </a>
-      </div>
-    </div>
-
-
-
-  </div>
-</section>
-
-<section class="bg-gray-50 py-16" data-aos="fade-up">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
-      What People Say
-    </h2>
-
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Testimonial Card 1 -->
-      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-        <p class="text-gray-600 mb-4">
-          "An excellent frontend developer! Delivered clean, responsive designs
-          and collaborated seamlessly with the team."
-        </p>
-        <div class="flex items-center gap-4">
-          <img
-            class="w-12 h-12 rounded-full object-cover"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbDRdegBmC5WmZiutZucRjafpIwK-Li_FgMQ&s"
-            alt="Client Photo"
-          />
-          <div>
-            <h4 class="font-semibold text-gray-800">David Lawal</h4>
-            <span class="text-sm text-gray-500">Project Manager</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testimonial Card 2 -->
-      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-        <p class="text-gray-600 mb-4">
-          "Great attention to detail. The UI/UX improvements boosted our
-          engagement significantly."
-        </p>
-        <div class="flex items-center gap-4">
-          <img
-            class="w-12 h-12 rounded-full object-cover"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLR6tGF_rvgubKJn8_TWkqI1QGJHIeX3mMog&s"
-            alt="Client Photo"
-          />
-          <div>
-            <h4 class="font-semibold text-gray-800">Blessing Chiamaka Orji</h4>
-            <span class="text-sm text-gray-500">Startup Founder</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testimonial Card 3 -->
-      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-        <p class="text-gray-600 mb-4">
-          'Omo, you dey deliver smooth broker. i go dey bring more deals bro.'
-        </p>
-        <div class="flex items-center gap-4">
-          <img
-            class="w-12 h-12 rounded-full object-cover"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS--umsWvE3lEuv6ZrmIUTzW1SKKNzkdf3l_Q&s"
-            alt="Client Photo"
-          />
-          <div>
-            <h4 class="font-semibold text-gray-800">B'G  Russ</h4>
-            <span class="text-sm text-gray-500">Client</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Resume -->
-<section id="resume" class="px-6 py-16 bg-gray-900 text-center text-white">
-  <h2 class="text-3xl font-bold mb-4" data-aos="fade-up">Download My CV</h2>
-  <p class="text-gray-300 mb-6" data-aos="fade-up" data-aos-delay="100">
-    Want to learn more about my experience and projects? Grab my CV or visit my GitHub.
-  </p>
-
-  <div class="flex flex-col md:flex-row justify-center items-center gap-4" data-aos="zoom-in" data-aos-delay="200">
-    <!-- CV Download Button -->
-    <a
-      href="cv.pdf"
-      target="_blank"
-      download
-      class="bg-indigo-600 px-6 py-3 rounded-full hover:bg-indigo-500 transition"
-    >
-      Download CV
-    </a>
-
-    <!-- GitHub Link -->
-    <a
-      href="https://github.com/Michael47009" 
-      target="_blank"
-      class="flex items-center gap-2 text-indigo-400 hover:underline"
-    >
-      <i data-feather="github" class="w-5 h-5"></i>
-      View GitHub
-    </a>
-  </div>
-</section>
-
-
-
-   <!-- Contact -->
-<section id="contact" class="px-6 py-16 bg-gray-800 text-center">
-  <h2 class="text-3xl font-bold mb-4"  >Get In Touch</h2>
-  <p class="text-gray-300 mb-6" data-aos="fade-up" data-aos-delay="100">
-    Have a project or job opportunity? Let’s talk.
-  </p>
-  <a
-    href="mailto:michaelnwankwoscloud@gmail.com"
-    class="bg-indigo-600 px-6 py-3 rounded-full hover:bg-indigo-500 transition inline-block shake-every-2s"
-    data-aos="zoom-in"
-    data-aos-delay="200"
-  >
-    michaelnwankwoscloud@gmail.com
-  </a>
-</section>
-
-
-    <!-- Footer -->
-    <footer class="text-center py-6 bg-gray-900 border-t border-gray-800">
-      <p class="text-gray-500">&copy; 2025 Michael Nwankwo. All rights reserved.</p>
-    </footer>
-  </body>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    feather.replace(); // renders all feather icons
-  });
+  // ── FEATHER ICONS (if loaded) ──
+  if (window.feather) feather.replace();
 </script>
-
+</body>
 </html>
