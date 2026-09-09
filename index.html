@@ -11,19 +11,27 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #0d0f14;
-      --surface:  #13161e;
-      --border:   #1e2330;
-      --amber:    #f59e0b;
-      --amber-dim:#7c4f06;
-      --text:     #e2e8f0;
-      --muted:    #64748b;
-      --soft:     #94a3b8;
+      --bg:       #0a0a0d;
+      --surface:  #111217;
+      --surface-2:#171922;
+      --border:   #22242e;
+      --amber:    #ffab2e;
+      --amber-dim:#6b4a17;
+      --text:     #e7e5e1;
+      --muted:    #63666f;
+      --soft:     #9a9ca6;
       --mono:     'JetBrains Mono', monospace;
       --sans:     'Inter', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    }
+
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
 
     body {
       background: var(--bg);
@@ -34,7 +42,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
@@ -43,439 +50,119 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--amber);
-      letter-spacing: 0.04em;
-    }
+    .nav-logo { font-family: var(--mono); font-size: 0.85rem; color: var(--amber); letter-spacing: 0.04em; }
     .nav-logo span { color: var(--muted); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.8rem;
-      font-family: var(--mono);
-      color: var(--soft);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; min-width: 0; }
+    .nav-links a { font-size: 0.8rem; font-family: var(--mono); color: var(--soft); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
     .nav-links a:hover { color: var(--amber); }
-    .nav-cta {
-      font-size: 0.78rem;
-      font-family: var(--mono);
-      color: var(--amber);
-      border: 1px solid var(--amber);
-      padding: 0.35rem 0.9rem;
-      border-radius: 3px;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
+    .nav-cta { font-size: 0.78rem; font-family: var(--mono); color: var(--amber); border: 1px solid var(--amber); padding: 0.35rem 0.9rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, color 0.2s; }
     .nav-cta:hover { background: var(--amber); color: var(--bg); }
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 0 5vw;
-      gap: 4rem;
-      padding-top: 56px;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero::before {
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 5vw; gap: 4rem; padding-top: 56px; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,171,46,0.06) 0%, transparent 70%); pointer-events: none; }
+    #hero::after {
       content: '';
-      position: absolute;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(245,158,11,0.07) 0%, transparent 70%);
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(180deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
       pointer-events: none;
     }
-
     .hero-left { max-width: 560px; }
-
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--amber);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 24px; height: 1px;
-      background: var(--amber);
-    }
-
-    h1 {
-      font-family: var(--mono);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.2rem;
-    }
+    .hero-eyebrow { font-family: var(--mono); font-size: 0.8rem; color: var(--amber); margin-bottom: 1.2rem; }
+    .hero-eyebrow::before { content: '// '; color: var(--muted); }
+    h1 { font-family: var(--mono); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
     h1 .name-amber { color: var(--amber); }
     h1 .name-dim { color: var(--muted); }
-
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--soft);
-      line-height: 1.75;
-      max-width: 460px;
-      margin-bottom: 2rem;
-    }
-
+    .hero-desc { font-size: 1rem; color: var(--soft); line-height: 1.75; max-width: 460px; margin-bottom: 2rem; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--amber);
-      color: var(--bg);
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      font-weight: 600;
-      padding: 0.7rem 1.4rem;
-      border-radius: 3px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: opacity 0.2s;
-    }
+    .btn-primary { background: var(--amber); color: var(--bg); font-family: var(--mono); font-size: 0.82rem; font-weight: 600; padding: 0.7rem 1.4rem; border-radius: 3px; text-decoration: none; letter-spacing: 0.04em; transition: opacity 0.2s; }
     .btn-primary:hover { opacity: 0.85; }
-    .btn-ghost {
-      color: var(--soft);
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      padding: 0.7rem 1.4rem;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .btn-ghost { color: var(--soft); font-family: var(--mono); font-size: 0.82rem; padding: 0.7rem 1.4rem; border: 1px solid var(--border); border-radius: 3px; text-decoration: none; letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s; }
     .btn-ghost:hover { border-color: var(--soft); color: var(--text); }
 
-    /* ── BUILD LOG (hero right) ── */
-    .build-log {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      font-family: var(--mono);
-      font-size: 0.78rem;
-    }
-    .build-log-bar {
-      background: #1a1d27;
-      padding: 0.6rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
+    .build-log { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-family: var(--mono); font-size: 0.78rem; }
+    .build-log-bar { background: #1a1d27; padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
     .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-r { background: #ff5f57; }
-    .dot-y { background: #febc2e; }
-    .dot-g { background: #28c840; }
+    .dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
     .log-title { color: var(--muted); font-size: 0.72rem; margin-left: 0.5rem; }
     .build-log-body { padding: 1.2rem 1.4rem; line-height: 2; min-height: 280px; }
     .log-line { display: flex; gap: 0.6rem; }
     .log-line .ts { color: var(--muted); user-select: none; }
-    .log-line .ok { color: #28c840; }
-    .log-line .info { color: var(--amber); }
-    .log-line .dim { color: var(--soft); }
-    .log-line .hi { color: #60a5fa; }
-    .cursor-blink {
-      display: inline-block;
-      width: 7px; height: 14px;
-      background: var(--amber);
-      animation: blink 1s step-end infinite;
-      vertical-align: middle;
-      margin-left: 2px;
-    }
+    .log-line .ok { color: #28c840; } .log-line .info { color: var(--amber); } .log-line .dim { color: var(--soft); } .log-line .hi { color: #60a5fa; }
+    .cursor-blink { display: inline-block; width: 7px; height: 14px; background: var(--amber); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* ── SECTION SHARED ── */
     section { padding: 6rem 5vw; }
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--amber);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    h2 {
-      font-family: var(--mono);
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
+    .section-label { font-family: var(--mono); font-size: 0.8rem; color: var(--soft); margin-bottom: 0.6rem; }
+    .section-label .cmt { color: var(--muted); }
+    h2 { font-family: var(--mono); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
 
-    /* ── STACK STRIP ── */
-    #stack {
-      padding: 2rem 5vw;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .stack-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      align-items: center;
-    }
-    .stack-chip {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--soft);
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.75rem;
-      border-radius: 2px;
-      letter-spacing: 0.04em;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    #stack { padding: 2rem 5vw; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+    .stack-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+    .stack-chip { font-family: var(--mono); font-size: 0.72rem; color: var(--soft); border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 2px; letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s; }
     .stack-chip:hover { border-color: var(--amber); color: var(--amber); }
 
-    /* ── ABOUT ── */
     #about { background: var(--bg); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .about-text p {
-      color: var(--soft);
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--soft); line-height: 1.8; margin-bottom: 1rem; }
     .about-text p strong { color: var(--text); font-weight: 500; }
-
     .stat-list { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
-    .stat-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem 1.2rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-    }
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--amber);
-      line-height: 1;
-      min-width: 2.5rem;
-    }
+    .stat-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; }
+    .stat-num { font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--amber); line-height: 1; min-width: 2.5rem; }
     .stat-label { font-size: 0.85rem; color: var(--soft); line-height: 1.4; margin-top: 0.2rem; }
 
-    /* ── PROJECTS ── */
     #projects { background: var(--surface); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .project-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      transition: border-color 0.25s, transform 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--amber);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .project-card:hover { border-color: #2a3042; transform: translateY(-3px); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .project-card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 1.6rem; display: flex; flex-direction: column; gap: 0.8rem; transition: border-color 0.25s; position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .project-card:hover { border-color: #2a3042; }
     .project-card:hover::before { transform: scaleX(1); }
-
-    .project-header { display: flex; align-items: flex-start; justify-content: space-between; }
-    .project-icon {
-      font-family: var(--mono);
-      font-size: 1.4rem;
-    }
-    .project-tag {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--amber);
-      border: 1px solid var(--amber-dim);
-      padding: 0.15rem 0.5rem;
-      border-radius: 2px;
-      letter-spacing: 0.06em;
-    }
-    .project-name {
-      font-family: var(--mono);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--soft);
-      line-height: 1.65;
-      flex: 1;
-    }
+    .project-card:hover .project-proc .dot { animation: blink 1s step-end infinite; }
+    .project-header { display: flex; align-items: center; justify-content: space-between; }
+    .project-proc { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+    .project-proc .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #28c840; margin-right: 0.45rem; }
+    .project-tag { font-family: var(--mono); font-size: 0.65rem; color: var(--amber); border: 1px solid var(--amber-dim); padding: 0.15rem 0.5rem; border-radius: 2px; letter-spacing: 0.03em; }
+    .project-name { font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--text); }
+    .project-desc { font-size: 0.875rem; color: var(--soft); line-height: 1.65; flex: 1; }
     .project-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .project-chip {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      background: #1a1d27;
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-    }
+    .project-chip { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); background: #1a1d27; padding: 0.2rem 0.55rem; border-radius: 2px; }
     .project-links { display: flex; gap: 1rem; padding-top: 0.4rem; border-top: 1px solid var(--border); }
-    .project-links a {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--soft);
-      text-decoration: none;
-      display: flex; align-items: center; gap: 0.3rem;
-      transition: color 0.2s;
-    }
+    .project-links a { font-family: var(--mono); font-size: 0.75rem; color: var(--soft); text-decoration: none; display: flex; align-items: center; gap: 0.3rem; transition: color 0.2s; }
     .project-links a:hover { color: var(--amber); }
-
-    /* ── PROJECT THUMBNAIL ── */
-    .project-thumb-wrap {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      background: #0a0c10;
-    }
-    .project-thumb {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      opacity: 0.82;
-      transition: opacity 0.25s, transform 0.35s;
-    }
-    .project-card:hover .project-thumb {
-      opacity: 1;
-      transform: scale(1.03);
-    }
-
-    /* ── FEATURED PROJECT ── */
-    .project-card.featured {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 2rem;
-    }
+    .project-thumb-wrap { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 4px; border: 1px solid var(--border); background: #0a0c10; }
+    .project-thumb { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; opacity: 0.82; transition: opacity 0.25s, transform 0.35s; }
+    .project-card:hover .project-thumb { opacity: 1; transform: scale(1.03); }
+    .project-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; }
     .project-card.featured .project-body { display: flex; flex-direction: column; gap: 0.8rem; }
 
-    /* ── TESTIMONIALS ── */
     #testimonials { background: var(--bg); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .testimonial-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.5rem;
-    }
-    .testimonial-card blockquote {
-      font-size: 0.9rem;
-      color: var(--soft);
-      line-height: 1.75;
-      font-style: italic;
-      margin-bottom: 1.2rem;
-      position: relative;
-      padding-left: 1rem;
-      border-left: 2px solid var(--amber);
-    }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; }
+    .testimonial-card blockquote { font-size: 0.9rem; color: var(--soft); line-height: 1.75; font-style: italic; margin-bottom: 1.2rem; position: relative; padding-left: 1rem; border-left: 2px solid var(--amber); }
     .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
-    .author-avatar {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--amber);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
+    .author-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.85rem; color: var(--amber); font-weight: 700; flex-shrink: 0; }
     .author-name { font-size: 0.85rem; font-weight: 500; color: var(--text); }
     .author-role { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
 
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--surface);
-      text-align: center;
-    }
+    #contact { background: var(--surface); text-align: center; }
     #contact h2 { margin-bottom: 0.75rem; }
     #contact p { color: var(--soft); max-width: 460px; margin: 0 auto 2.5rem; font-size: 0.95rem; }
     .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .contact-link {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--soft);
-      border: 1px solid var(--border);
-      padding: 0.65rem 1.2rem;
-      border-radius: 3px;
-      text-decoration: none;
-      display: flex; align-items: center; gap: 0.5rem;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .contact-link { font-family: var(--mono); font-size: 0.8rem; color: var(--soft); border: 1px solid var(--border); padding: 0.65rem 1.2rem; border-radius: 3px; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: border-color 0.2s, color 0.2s; }
     .contact-link:hover { border-color: var(--amber); color: var(--amber); }
-    .contact-link.primary {
-      background: var(--amber);
-      color: var(--bg);
-      border-color: var(--amber);
-      font-weight: 600;
-    }
+    .contact-link.primary { background: var(--amber); color: var(--bg); border-color: var(--amber); font-weight: 600; }
     .contact-link.primary:hover { opacity: 0.85; color: var(--bg); }
 
-    /* ── FOOTER ── */
-    footer {
-      padding: 1.5rem 5vw;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    /* ── DIVIDER ── */
+    footer { padding: 1.5rem 5vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
     .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       #hero { grid-template-columns: 1fr; padding-top: 80px; gap: 2.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .project-card.featured { grid-template-columns: 1fr; }
       .project-card.featured .project-thumb-wrap { min-width: unset !important; aspect-ratio: 16/9 !important; }
-      nav .nav-links { display: none; }
+      nav .nav-links { gap: 1.1rem; overflow-x: auto; scrollbar-width: none; }
+      nav .nav-links::-webkit-scrollbar { display: none; }
+      nav .nav-links a { white-space: nowrap; }
     }
     @media (max-width: 600px) {
       section { padding: 4rem 1.2rem; }
@@ -483,21 +170,11 @@
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
 
-    /* ── SCROLL FADE ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: none;
-    }
+
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Michael Stanley<span>/</span>dev</div>
   <ul class="nav-links">
@@ -509,7 +186,6 @@
   <a href="https://drive.google.com/file/d/1-F1VXG5mT7A94KUZkhebaQGog6KU_fRe/view?usp=drive_link" download class="nav-cta">cv.pdf ↓</a>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">available for remote work</p>
@@ -518,11 +194,11 @@
       <span class="name-amber">Nwankwo</span>
     </h1>
     <p class="hero-desc">
-      Full-stack & mobile developer shipping production-grade web platforms and React Native apps. 
+      Full-stack & mobile developer shipping production-grade web platforms and React Native apps.
       Based in Nigeria. Building things that work at scale.
     </p>
     <div class="hero-actions">
-      <a href="#projects" class="btn-primary">View projects →</a>
+      <a href="#projects" class="btn-primary">View projects</a>
       <a href="https://wa.me/+2348115501712" class="btn-ghost">get in touch</a>
     </div>
   </div>
@@ -534,13 +210,10 @@
       <div class="dot dot-g"></div>
       <span class="log-title">michael@dev ~ build log</span>
     </div>
-    <div class="build-log-body" id="logBody">
-      <!-- JS fills this -->
-    </div>
+    <div class="build-log-body" id="logBody"></div>
   </div>
 </section>
 
-<!-- STACK STRIP -->
 <div id="stack">
   <div class="stack-row">
     <span class="stack-chip">React</span>
@@ -560,117 +233,65 @@
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about">
-  <div class="about-grid fade-in">
+  <div class="about-grid">
     <div class="about-text">
-      <p class="section-label">// about</p>
+      <p class="section-label"><span class="cmt">//</span> about</p>
       <h2>I build platforms,<br>not just pages.</h2>
-      <p>
-        I'm a full-stack and mobile developer who works across the entire product — 
-        from database schema to pixel-perfect UI. I've led the engineering on 
-        <strong>FutyBills</strong>, a live gadget marketplace with a React web frontend, 
-        React Native mobile app, and a PHP backend handling payments, reservations, MFA, and real-time chat.
-      </p>
-      <p>
-        I'm currently migrating that backend to <strong>FastAPI + PostgreSQL</strong> and shipping 
-        features across web and mobile simultaneously. I write the code, debug the edge cases, 
-        and make it fast.
-      </p>
-      <p>
-        I work well in async remote teams, communicate clearly, and ship on time.
-      </p>
+      <p>I'm a full-stack and mobile developer who works across the entire product — from database schema to pixel-perfect UI. I've led the engineering on <strong>FutyBills</strong>, a live gadget marketplace with a React web frontend, React Native mobile app, and a PHP backend handling payments, reservations, MFA, and real-time chat.</p>
+      <p>I'm currently migrating that backend to <strong>FastAPI + PostgreSQL</strong> and shipping features across web and mobile simultaneously. I write the code, debug the edge cases, and make it fast.</p>
+      <p>I work well in async remote teams, communicate clearly, and ship on time.</p>
     </div>
     <div class="stat-list">
-      <div class="stat-item">
-        <div class="stat-num">5+</div>
-        <div class="stat-label">Production projects shipped — marketplace, flight booking, crypto dashboard, DeFi platform</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Platforms with live payment integrations (Paystack, Web3)</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Debug sessions survived. Still shipping.</div>
-      </div>
+      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Production projects shipped — marketplace, flight booking, crypto dashboard, DeFi platform</div></div>
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Platforms with live payment integrations (Paystack, Web3)</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Debug sessions survived. Still shipping.</div></div>
     </div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- PROJECTS -->
 <section id="projects">
-  <p class="section-label">// selected work</p>
+  <p class="section-label"><span class="cmt">//</span> selected work</p>
   <h2>Things I've shipped</h2>
-
   <div class="projects-grid">
 
-       <!-- FutyBills — Featured -->
-    <div class="project-card featured fade-in">
+    <div class="project-card featured">
       <div class="project-body">
         <div class="project-header">
-          <span class="project-icon"></span>
+          <span class="project-proc"><span class="dot"></span>proc/filloptech</span>
           <span class="project-tag">FULL STACK ENGINEER</span>
         </div>
         <div class="project-name">FillopTech — Desktop CBT Application</div>
-        <p class="project-desc">
-       ### Fillop CBT Guru
-
-A secure desktop CBT platform supporting online/offline examinations, automated grading, question management, and performance analytics.
-
-* Developed the CBT application using **Electron, React & Vite**.
-* Implemented **offline-first exams** with local database synchronization.
-* Built **question management, CSV import, LaTeX formulas, and image support**.
-* Implemented **timed exams, automated scoring, results, and performance analytics**.
- </p>
+        <p class="project-desc">A secure desktop CBT platform supporting online/offline examinations, automated grading, question management, and performance analytics. Developed using Electron, React & Vite. Implemented offline-first exams with local database synchronization. Built question management, CSV import, LaTeX formulas, and image support. Implemented timed exams, automated scoring, results, and performance analytics.</p>
         <div class="project-chips">
-          <span class="project-chip">React</span>
-          <span class="project-chip">Electron</span>
-          <span class="project-chip">TypeScript</span>
-          <span class="project-chip">PHP</span>
-          <span class="project-chip">Postgre</span>
-          <span class="project-chip">Paystack</span>
-          <span class="project-chip">Redux</span>
-          <span class="project-chip">JWT</span>
+          <span class="project-chip">React</span><span class="project-chip">Electron</span><span class="project-chip">TypeScript</span><span class="project-chip">PHP</span><span class="project-chip">Postgre</span><span class="project-chip">Paystack</span><span class="project-chip">Redux</span><span class="project-chip">JWT</span>
         </div>
         <div class="project-links">
-          <a href="https://filloptech.com" target="_blank">↗ Live site</a>
-          <a href="https://cbt.filloptech.com/downloads/cbt.exe target="_blank">↗ Desktop application link </a>
+          <a href="https://filloptech.com" target="_blank">$ open --live</a>
+          <a href="https://cbt.filloptech.com/downloads/cbt.exe" target="_blank">$ download --exe</a>
         </div>
       </div>
       <div class="project-thumb-wrap" style="min-width:340px; aspect-ratio:4/3;">
         <img src="https://cbt.filloptech.com/downloads/file.png" alt="Filloptech Application screenshot" class="project-thumb" loading="lazy">
       </div>
     </div>
-    <!-- FutyBills — Featured -->
-    <div class="project-card  fade-in">
+
+    <div class="project-card">
       <div class="project-body">
         <div class="project-header">
-          <span class="project-icon">🛒</span>
+          <span class="project-proc"><span class="dot"></span>proc/futybills</span>
           <span class="project-tag">LEAD ENGINEER</span>
         </div>
         <div class="project-name">FutyBills — Gadget Marketplace</div>
-        <p class="project-desc">
-          End-to-end platform for buying and selling electronics. Built the React web frontend, 
-          React Native mobile app (Expo SDK 54), and the PHP/MySQL backend. 
-          Features include JWT auth + MFA, real-time chat, Paystack checkout with reservation locking, 
-          and a Redux-powered marketplace with live category filtering.
-        </p>
+        <p class="project-desc">End-to-end platform for buying and selling electronics. Built the React web frontend, React Native mobile app (Expo SDK 54), and the PHP/MySQL backend. Features include JWT auth + MFA, real-time chat, Paystack checkout with reservation locking, and a Redux-powered marketplace with live category filtering.</p>
         <div class="project-chips">
-          <span class="project-chip">React</span>
-          <span class="project-chip">React Native</span>
-          <span class="project-chip">TypeScript</span>
-          <span class="project-chip">PHP</span>
-          <span class="project-chip">MySQL</span>
-          <span class="project-chip">Paystack</span>
-          <span class="project-chip">Redux</span>
-          <span class="project-chip">JWT</span>
+          <span class="project-chip">React</span><span class="project-chip">React Native</span><span class="project-chip">TypeScript</span><span class="project-chip">PHP</span><span class="project-chip">MySQL</span><span class="project-chip">Paystack</span><span class="project-chip">Redux</span><span class="project-chip">JWT</span>
         </div>
         <div class="project-links">
-          <a href="https://futybills.com" target="_blank">↗ Live site</a>
-          <a href="https://app.futybills.com/marketplace target="_blank">↗ Marketplace </a>
+          <a href="https://futybills.com" target="_blank">$ open --live</a>
+          <a href="https://app.futybills.com/marketplace" target="_blank">$ open --marketplace</a>
         </div>
       </div>
       <div class="project-thumb-wrap" style="min-width:340px; aspect-ratio:4/3;">
@@ -678,208 +299,107 @@ A secure desktop CBT platform supporting online/offline examinations, automated 
       </div>
     </div>
 
-    <!-- Flight Ticket Booking -->
-    <div class="project-card fade-in">
+    <div class="project-card">
       <div class="project-header">
-        <span class="project-icon"></span>
+        <span class="project-proc"><span class="dot"></span>proc/skybridge</span>
         <span class="project-tag">FULLSTACK</span>
       </div>
       <div class="project-name">SkyBridge — Flight Booking</div>
-      <div class="project-thumb-wrap">
-        <img src="https://futybills.com/api/Michael_dev/thumb_flight.png" alt="SkyBridge flight booking screenshot" class="project-thumb" loading="lazy">
-      </div>
-      <p class="project-desc">
-        Full airline booking platform — SkyBridge Airlines. Hero with live flight search, 
-        cabin class selection, multi-destination support, and a polished checkout flow. 
-        Includes a real-time flight status board and multilingual UI.
-      </p>
-      <div class="project-chips">
-        <span class="project-chip">React</span>
-        <span class="project-chip">Node.js</span>
-        <span class="project-chip">REST API</span>
-      </div>
+      <div class="project-thumb-wrap"><img src="https://futybills.com/api/Michael_dev/thumb_flight.png" alt="SkyBridge flight booking screenshot" class="project-thumb" loading="lazy"></div>
+      <p class="project-desc">Full airline booking platform — SkyBridge Airlines. Hero with live flight search, cabin class selection, multi-destination support, and a polished checkout flow. Includes a real-time flight status board and multilingual UI.</p>
+      <div class="project-chips"><span class="project-chip">React</span><span class="project-chip">Node.js</span><span class="project-chip">REST API</span></div>
       <div class="project-links">
-        <a href="https://github.com/michael44v/flightTicket" target="_blank">↗ GitHub</a>
-          <a href="https://turkishairlines-sigma.vercel.app/" target="_blank">↗ Live site</a>
+        <a href="https://github.com/michael44v/flightTicket" target="_blank">$ open --github</a>
+        <a href="https://turkishairlines-sigma.vercel.app/" target="_blank">$ open --live</a>
       </div>
     </div>
 
-    <!-- Chaindustry -->
-    <div class="project-card fade-in">
+    <div class="project-card">
       <div class="project-header">
-        <span class="project-icon"></span>
+        <span class="project-proc"><span class="dot"></span>proc/chaindustry</span>
         <span class="project-tag">FRONTEND</span>
       </div>
       <div class="project-name">Chaindustry</div>
-      <div class="project-thumb-wrap">
-        <img src="https://futybills.com/api/Michael_dev/thumb_chaindustry.png" alt="Chaindustry Web3 platform screenshot" class="project-thumb" loading="lazy">
-      </div>
-      <p class="project-desc">
-        Frontend for a DoToEarn Web3 network. Built the features page with task/earn flows, 
-        CDSP token conversion UI, animated leaderboard, and mobile app mockups. 
-        Dark purple aesthetic with wallet connection and NFT exchange.
-      </p>
-      <div class="project-chips">
-        <span class="project-chip">React</span>
-        <span class="project-chip">Web3</span>
-        <span class="project-chip">Tailwind</span>
-      </div>
+      <div class="project-thumb-wrap"><img src="https://futybills.com/api/Michael_dev/thumb_chaindustry.png" alt="Chaindustry Web3 platform screenshot" class="project-thumb" loading="lazy"></div>
+      <p class="project-desc">Frontend for a DoToEarn Web3 network. Built the features page with task/earn flows, CDSP token conversion UI, animated leaderboard, and mobile app mockups. Dark purple aesthetic with wallet connection and NFT exchange.</p>
+      <div class="project-chips"><span class="project-chip">React</span><span class="project-chip">Web3</span><span class="project-chip">Tailwind</span></div>
       <div class="project-links">
-        <a href="https://chaindustry.io" target="_blank">↗ Live site</a>
-        <a href="https://github.com/Michael44v/chaindustry" target="_blank">↗ GitHub</a>
+        <a href="https://chaindustry.io" target="_blank">$ open --live</a>
+        <a href="https://github.com/Michael44v/chaindustry" target="_blank">$ open --github</a>
       </div>
     </div>
 
-    <!-- Crypto Investment -->
-    <div class="project-card fade-in">
+    <div class="project-card">
       <div class="project-header">
-        <span class="project-icon"></span>
+        <span class="project-proc"><span class="dot"></span>proc/bluevault</span>
         <span class="project-tag">FULLSTACK</span>
       </div>
       <div class="project-name">BlueVault — Crypto Platform</div>
-      <div class="project-thumb-wrap">
-        <img src="https://futybills.com/api/Michael_dev/thumb_crypto.png" alt="BlueVault crypto investment dashboard screenshot" class="project-thumb" loading="lazy">
-      </div>
-      <p class="project-desc">
-        Full crypto investment dashboard — live market cap, Fear & Greed index, 
-        Altcoin season tracker, real-time price ticker, and portfolio management. 
-        CoinMarketCap-style data density with live price polling and social feed.
-      </p>
-      <div class="project-chips">
-        <span class="project-chip">React</span>
-        <span class="project-chip">TypeScript</span>
-        <span class="project-chip">PHP</span>
-        <span class="project-chip">Web3</span>
-        <span class="project-chip">CoinGecko API</span>
-      </div>
+      <div class="project-thumb-wrap"><img src="https://futybills.com/api/Michael_dev/thumb_crypto.png" alt="BlueVault crypto investment dashboard screenshot" class="project-thumb" loading="lazy"></div>
+      <p class="project-desc">Full crypto investment dashboard — live market cap, Fear & Greed index, Altcoin season tracker, real-time price ticker, and portfolio management. CoinMarketCap-style data density with live price polling and social feed.</p>
+      <div class="project-chips"><span class="project-chip">React</span><span class="project-chip">TypeScript</span><span class="project-chip">PHP</span><span class="project-chip">Web3</span><span class="project-chip">CoinGecko API</span></div>
       <div class="project-links">
-        <a href="https://github.com/michael44v/bluevult_crypto" target="_blank">↗ GitHub</a>
-        <a href="https://bluevult.com" target="_blank">↗ Live</a>
-
+        <a href="https://github.com/michael44v/bluevult_crypto" target="_blank">$ open --github</a>
+        <a href="https://bluevult.com" target="_blank">$ open --live</a>
       </div>
     </div>
 
-    <!-- Slate Admin Dashboard -->
-    <div class="project-card fade-in">
+    <div class="project-card">
       <div class="project-header">
-        <span class="project-icon"></span>
+        <span class="project-proc"><span class="dot"></span>proc/slate</span>
         <span class="project-tag">FULLSTACK</span>
       </div>
       <div class="project-name">Slate — Admin Dashboard</div>
       <div class="project-thumb-wrap" style="background:#0f1117; display:flex; align-items:center; justify-content:center;">
         <img src="https://futybills.com/api/Michael_dev/slate.jpeg" alt="Slate admin dashboard" class="project-thumb" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\'font-family:var(--mono);font-size:0.72rem;color:var(--muted)\'>slate.jpeg</span>'">
       </div>
-      <p class="project-desc">
-        Admin dashboard built with React, TypeScript, and Express. 
-        Tracks income and expenses in real time with chart visualisations, 
-        transaction history, and category breakdowns.
-      </p>
-      <div class="project-chips">
-        <span class="project-chip">React</span>
-        <span class="project-chip">TypeScript</span>
-        <span class="project-chip">Express</span>
-        <span class="project-chip">Charts</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/Michael47009" target="_blank">↗ GitHub</a>
-      </div>
+      <p class="project-desc">Admin dashboard built with React, TypeScript, and Express. Tracks income and expenses in real time with chart visualisations, transaction history, and category breakdowns.</p>
+      <div class="project-chips"><span class="project-chip">React</span><span class="project-chip">TypeScript</span><span class="project-chip">Express</span><span class="project-chip">Charts</span></div>
+      <div class="project-links"><a href="https://github.com/Michael47009" target="_blank">$ open --github</a></div>
     </div>
 
-    <!-- FED API Test -->
-    <div class="project-card fade-in">
+    <div class="project-card">
       <div class="project-header">
-        <span class="project-icon"></span>
+        <span class="project-proc"><span class="dot"></span>proc/fed-api-test</span>
         <span class="project-tag">REACT</span>
       </div>
       <div class="project-name">FED API Test 2025</div>
-      <p class="project-desc">
-        Frontend engineering interview assessment answered in React JSX. 
-        Demonstrates REST API consumption, component architecture, 
-        and clean state management under time constraint.
-      </p>
-      <div class="project-chips">
-        <span class="project-chip">React</span>
-        <span class="project-chip">JSX</span>
-        <span class="project-chip">REST API</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/Michael47009/REACT-JS-FED-API-TEST-2025-" target="_blank">↗ GitHub</a>
-      </div>
+      <p class="project-desc">Frontend engineering interview assessment answered in React JSX. Demonstrates REST API consumption, component architecture, and clean state management under time constraint.</p>
+      <div class="project-chips"><span class="project-chip">React</span><span class="project-chip">JSX</span><span class="project-chip">REST API</span></div>
+      <div class="project-links"><a href="https://github.com/Michael47009/REACT-JS-FED-API-TEST-2025-" target="_blank">$ open --github</a></div>
     </div>
 
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials">
-  <p class="section-label fade-in">// people say</p>
-  <h2 class="fade-in">From clients & colleagues</h2>
-
+  <p class="section-label"><span class="cmt">//</span> people say</p>
+  <h2>From clients & colleagues</h2>
   <div class="testimonials-grid">
-
-    <div class="testimonial-card fade-in">
-      <blockquote>
-        An excellent frontend developer. Delivered clean, responsive designs 
-        and collaborated seamlessly with the team throughout the project.
-      </blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar">DL</div>
-        <div>
-          <div class="author-name">David Lawal</div>
-          <div class="author-role">Project Manager</div>
-        </div>
-      </div>
+    <div class="testimonial-card">
+      <blockquote>An excellent frontend developer. Delivered clean, responsive designs and collaborated seamlessly with the team throughout the project.</blockquote>
+      <div class="testimonial-author"><div class="author-avatar">DL</div><div><div class="author-name">David Lawal</div><div class="author-role">Project Manager</div></div></div>
     </div>
-
-    <div class="testimonial-card fade-in">
-      <blockquote>
-        Great attention to detail. The UI/UX improvements he made boosted 
-        our user engagement significantly within weeks of launch.
-      </blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar">BC</div>
-        <div>
-          <div class="author-name">Blessing Chiamaka Orji</div>
-          <div class="author-role">Startup Founder</div>
-        </div>
-      </div>
+    <div class="testimonial-card">
+      <blockquote>Great attention to detail. The UI/UX improvements he made boosted our user engagement significantly within weeks of launch.</blockquote>
+      <div class="testimonial-author"><div class="author-avatar">BC</div><div><div class="author-name">Blessing Chiamaka Orji</div><div class="author-role">Startup Founder</div></div></div>
     </div>
-
-    <div class="testimonial-card fade-in">
-      <blockquote>
-        Guy delivers smooth. I keep bringing more deals because I know the 
-        work will come out right every time. Solid engineer.
-      </blockquote>
-      <div class="testimonial-author">
-        <div class="author-avatar">BR</div>
-        <div>
-          <div class="author-name">B'G Russ</div>
-          <div class="author-role">Client</div>
-        </div>
-      </div>
+    <div class="testimonial-card">
+      <blockquote>Guy delivers smooth. I keep bringing more deals because I know the work will come out right every time. Solid engineer.</blockquote>
+      <div class="testimonial-author"><div class="author-avatar">BR</div><div><div class="author-name">B'G Russ</div><div class="author-role">Client</div></div></div>
     </div>
-
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <p class="section-label">// contact</p>
+  <p class="section-label"><span class="cmt">//</span> contact</p>
   <h2>Let's build something.</h2>
   <p>Open to remote contracts, full-time roles, and interesting projects. Response within 24h.</p>
   <div class="contact-links">
-    <a href="mailto:michaelnwankwoscloud@gmail.com" class="contact-link primary">
-      ✉ michaelnwankwoscloud@gmail.com
-    </a>
-    <a href="https://github.com/Michael47009" target="_blank" class="contact-link">
-      ⌥ GitHub
-    </a>
-    <a href="https://x.com/RnaEu_" target="_blank" class="contact-link">
-      ✦ Twitter / X
-    </a>
-    <a href="cv.pdf" download class="contact-link">
-      ↓ Download CV
-    </a>
+    <a href="mailto:michaelnwankwoscloud@gmail.com" class="contact-link primary">$ mail michaelnwankwoscloud@gmail.com</a>
+    <a href="https://github.com/Michael47009" target="_blank" class="contact-link">$ open --github</a>
+    <a href="https://x.com/RnaEu_" target="_blank" class="contact-link">$ open --x</a>
+    <a href="https://drive.google.com/file/d/1-F1VXG5mT7A94KUZkhebaQGog6KU_fRe/view?usp=drive_link" download class="contact-link">$ download --cv</a>
   </div>
 </section>
 
@@ -889,7 +409,6 @@ A secure desktop CBT platform supporting online/offline examinations, automated 
 </footer>
 
 <script>
-  // ── BUILD LOG ANIMATION ──
   const lines = [
     { ts: '00:00:01', type: 'ok',   text: 'system   booted successfully' },
     { ts: '00:00:02', type: 'info', text: 'loading  React + TypeScript workspace' },
@@ -905,16 +424,10 @@ A secure desktop CBT platform supporting online/offline examinations, automated 
     { ts: '00:00:19', type: 'dim',  text: 'status   5 projects shipped · still building' },
     { ts: '00:00:20', type: 'ok',   text: 'ready    open to remote work ✓' },
   ];
-
   const logBody = document.getElementById('logBody');
   let i = 0;
   function appendLine() {
-    if (i >= lines.length) {
-      const cursor = document.createElement('span');
-      cursor.className = 'cursor-blink';
-      logBody.appendChild(cursor);
-      return;
-    }
+    if (i >= lines.length) { const cursor = document.createElement('span'); cursor.className = 'cursor-blink'; logBody.appendChild(cursor); return; }
     const l = lines[i++];
     const div = document.createElement('div');
     div.className = 'log-line';
@@ -923,16 +436,17 @@ A secure desktop CBT platform supporting online/offline examinations, automated 
     logBody.scrollTop = logBody.scrollHeight;
     setTimeout(appendLine, 280);
   }
-  setTimeout(appendLine, 800);
-
-  // ── SCROLL FADE ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // ── FEATHER ICONS (if loaded) ──
-  if (window.feather) feather.replace();
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    lines.forEach(l => {
+      const div = document.createElement('div');
+      div.className = 'log-line';
+      div.innerHTML = `<span class="ts">${l.ts}</span><span class="${l.type}">${l.text}</span>`;
+      logBody.appendChild(div);
+    });
+  } else {
+    setTimeout(appendLine, 800);
+  }
 </script>
 </body>
 </html>
